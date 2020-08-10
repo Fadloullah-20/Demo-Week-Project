@@ -6,13 +6,13 @@
 let jump = false; // are we jumping
 let direction = 1; // force of gravity in the y direction
 let velocity = 1; // speed of the player
-let jumpPower = 15; // strength of player's jump
+let jumpPower = 20; // strength of player's jump
 let fallingSpeed = 1; // equal to velocity
 let minHeight = 00; // height of ground
 let maxHeight = 0; // height of sky
 let jumpCounter = 0; // keeps track of how much we are jumping
 let jumpWatch=0; //how many times jump is true
-let barrier=1; // stops character falling through stuff
+let barrier; // stops character falling through stuff
 let state = 2;
 let dy;
 let iceS;
@@ -82,6 +82,11 @@ function setup() {
 }
                 //DRAW
 function draw() {
+    console.log(bear.collide(ice));
+    if(state==1){
+        background(0,0,0);
+    }
+    if(state ==2){
     fill(0, 0, 25);
     background(0, 170, 255);
     gravity();
@@ -122,7 +127,19 @@ function draw() {
         else {
             jump = false;
         } 
-        
+        if (keyIsDown(UP_ARROW) && bear.collide(ice)){
+            jump=true;
+            jumpWatch=0;
+        }
+        if(keyIsDown(UP_ARROW) && bear.collide(iceB)){
+            jump = true;
+            jumpWatch = 0;
+        }
+        if(keyIsDown(UP_ARROW) && bear.collide(iceT)){
+            jump = true;
+            jumpWatch = 0;
+        }
+
         if(state==1||state==2||state==3||state==4){
             py+=4;
         }
@@ -182,34 +199,31 @@ function draw() {
             jump=false;
            // jumpWatch=0
         }
-
-        if (bear.collide(iceB)){
-            jump = true;
-            jumpWatch = 0;
+        for(let i=0; i<6; i++){
+        if (bear.collide(iceB[i])){
+           
+            py= iceB[i].position.y-10;
+           // py= 5+iceB.position.y
            // barrier= vy+fallingSpeed-1;
           // barrier = 1;
+            }
         }
-        else{
-            //barrier=1;
-        }
-        if(bear.collide(iceT)){
-            jump=true;
-            jumpWatch=0;
+        for(let i=0;i<6;i++){
+            if(bear.collide(iceT[i])){
+         //  for()
+                py= iceT[i].position.y-10;
+           
             //barrier=vy+fallingSpeed-1;
            // barrier=1;
-        }
-        else{
-            //barrier=6;
+            }
         }
         if (bear.collide(ice)){
-           jump=true;
-           jumpWatch=0;
+          
+           py= ice.position.y-10;
             //barrier=vy+fallingSpeed-1;
           //  barrier=1;
         }
-        else{
-            //barrier=6;
-        }
+        
 
     }
     jumpObserver();
@@ -352,6 +366,7 @@ function draw() {
 
  
   drawSprites();
+    }
 }
 
 
