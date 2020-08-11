@@ -6,14 +6,14 @@
 let jump = false; // are we jumping
 let direction = 1; // force of gravity in the y direction
 let velocity = 1; // speed of the player
-let jumpPower = 20; // strength of player's jump
+let jumpPower = 16; // strength of player's jump
 let fallingSpeed = 1; // equal to velocity
 let minHeight = 00; // height of ground
 let maxHeight = 0; // height of sky
 let jumpCounter = 0; // keeps track of how much we are jumping
 let jumpWatch=0; //how many times jump is true
-let barrier; // stops character falling through stuff
-let state = 2;
+let barrier; // stops character from falling through stuff
+let state = 3;
 let dy;
 let iceS;
 px = 150;
@@ -22,82 +22,126 @@ let gravity= 0.1;
 let vy = 1.0;
 let heart = 3;
 
-
+let newIceB;
         //SETUP
+
 function setup() {
-  createCanvas(1000, 600);
+    createCanvas(1000, 600);
     
     iceT = new Group(); // top part
     iceB = new Group(); // bottom part
     iceD = new Group(); // portion of the ice that pushes the player down
     
-  // for loop for platforms
-  for(let i = 0; i < 6; i++) {
-    let newIceT = createSprite(random(0, width), random(0, height));
-    newIceT.addImage(loadImage('assets/iceF1.png'));
-    iceT.add(newIceT);
-  }
-  for(let i = 0; i < 6; i++) {
-    let newIceB = createSprite(random(0, width), random(0, height));
-    newIceB.addImage(loadImage('assets/iceF1.png'));
-    iceB.add(newIceB);
-  }
-  for(let i = 0; i < 12; i++) {
-    let newIceD = createSprite(random(0, width), random(0, height));
-    newIceD.addImage(loadImage('assets/iceF1.png'));
-    iceD.add(newIceD);
-  }
+    // for loop for platforms
+    for(let i = 0; i < 6; i++) {
+        let newIceT = createSprite(random(0, width), random(0, height));
+        newIceT.addImage(loadImage('assets/iceF1.png'));
+        newIceT.addAnimation('melty','assets/iceF1.png','assets/ice1.Png','assets/ice2.png','assets/ice3.png','assets/ice4.png','assets/ice5.png','assets/ice6.png');
+        iceT.add(newIceT);
+    }
+    for(let i = 0; i < 6; i++) {
+        let newIceB = createSprite(random(0, width), random(0, height));
+        newIceB.addImage(loadImage('assets/iceF1.png'));
+        newIceB.addAnimation('melty','assets/iceF1.png','assets/ice1.Png','assets/ice2.png','assets/ice3.png','assets/ice4.png','assets/ice5.png','assets/ice6.png');
+        iceB.add(newIceB);
+    }
+    for(let i = 0; i < 12; i++) {
+        let newIceD = createSprite(random(0, width), random(0, height));
+        newIceD.addAnimation('normal','assets/iceF1.png')
+        newIceD.addAnimation('melty','assets/iceF1.png','assets/ice1.Png','assets/ice2.png','assets/ice3.png','assets/ice4.png','assets/ice5.png','assets/ice6.png');
+        //newIceD1.addAnimation('melty','assets/iceF1.png','assets/ice1.Png','assets/ice2.png','assets/ice3.png','assets/ice4.png','assets/ice5.png');
+        iceD.add(newIceD);
+       // iceD.add(newIceD1)=false;
+    }
 
 
-  // sprite creation
-  bear = createSprite(400, 200,20,20);
-  //compact way to add an image
-  bear.addAnimation('forward','assets/bearX1.png','assets/bearX1.png','assets/bearY1.png','assets/bearY1.png');
-  bear.addAnimation('normal','assets/bearX1.png');
-  //bear.addAnimation('normalB','assets/bearX.png');
-  bear.addAnimation('backward','assets/bearX.png','assets/bearX.png','assets/bearY.png','assets/bearY.png');
-  // ice sprite
-  ice = createSprite(150, 200);
-  ice.addAnimation('normal','assets/iceF1.png');
-  //ice.addAnimation('melty','assets/iceF1.png','assets/iceF1A.Png','assets/iceF1B.png','assets/iceF1C.png','assets/assets/iceF1D.png','assets/iceF1E.png');
+    // sprite creation
+    bear = createSprite(400, 200,20,20);
+    //compact way to add an image
+    bear.addAnimation('forward','assets/bearX1.png','assets/bearX1.png','assets/bearY1.png','assets/bearY1.png');
+    bear.addAnimation('normal','assets/bearX1.png');
 
-  
-  // ground sprite
-  ground = createSprite(500,650,20,20);
-  ground.addImage(loadImage('assets/ground.png'));
+    bear.addAnimation('left','assets/bearX.png');
+    bear.addAnimation('backward','assets/bearX.png','assets/bearX.png','assets/bearY.png','assets/bearY.png');
+    // ice sprite
+    ice = createSprite(150, 200);
+    ice.addAnimation('normal','assets/iceF1.png');
+    ice.addAnimation('melty','assets/iceF1.png','assets/ice1.Png','assets/ice2.png','assets/ice3.png','assets/ice4.png','assets/ice5.png','assets/ice6.png');
 
-  // baby cub sprite
-  // baby = createSprite(400, 200,20,20);
-  
+    
+    // ground sprite
+    ground = createSprite(500, 650, 20, 20);
+    ground.addImage(loadImage('assets/ground.png')); // replace with water 
 
-  // heart sprites
-  heart1 = createSprite(25, 25, 20, 20);
-  heart1.addImage(loadImage('assets/heart.png'));
-  heart2 = createSprite(75, 25, 20, 20);
-  heart2.addImage(loadImage('assets/heart.png'));
-  heart3 = createSprite(125, 25, 20, 20);
-  heart3.addImage(loadImage('assets/heart.png'));
+    // baby cub sprite
+    baby = createSprite(850, 223, 20, 20);
 
-            
-}
+    baby.addImage(loadImage('assets/prime.png'));
+    
+    
+   
+    // heart sprites
+    heart1 = createSprite(25, 25, 20, 20);
+    heart1.addImage(loadImage('assets/heart.png'));
+    heart2 = createSprite(75, 25, 20, 20);
+    heart2.addImage(loadImage('assets/heart.png'));
+    heart3 = createSprite(125, 25, 20, 20);
+    heart3.addImage(loadImage('assets/heart.png'));
+
+    // screen image
+    loseScreen = loadImage('assets/lose.png');
+    winScreen = loadImage('assets/dancing.gif');
+    bg = loadImage('assets/background.png');
+
+
+                
+    }
                 //DRAW
 function draw() {
-    console.log(bear.collide(ice));
-    if(state==1){
-        background(0,0,0);
+    //console.log(bear.collide(ice));
+    // start screen
+ 
+    if (state == 1) {
+        background(bg);
+        //background();
+        // title button
+        rect(370, 100, 400, 50, 20)
+        // play button - go to state 3
+        fill('red');
+        rect(500, 320, 100, 50, 40);
+        // how to play button - go to help state 
+        fill('blue');
+        rect(500, 380, 90, 40, 40);
+        // excersion button
+        rect(525, 435, 50, 25, 40);
+        
     }
-    if(state ==2){
+    // how to play
+    if (state == 2) {
+        background(bg);
+        fill(0, 50, 255);
+        textSize(35);
+        textFont('Lemonada');
+        text("Your objective is to find", 250, 250);
+        text("your lost cub while jumping on", 250, 300);
+        text("melting ice platforms", 250, 350)
+        text("Up arrow - jump, left/right arrow - move", 250, 400);
+    }
+    // test stage
+    if (state == 3) {
     fill(0, 0, 25);
-    background(0, 170, 255);
+    background(bg);
+   // image(backScreen,0,0,1000,600);
     gravity();
-
-      //  image(iceC,100,450,10,10);
-    //fill(0, 0, 255);
-    //rect(0, 500, 1000, 100);
+       
+      
+      console.log(ice.animation.getFrame());
+  
     bear.frameDelay=20;
-    if(state=2){
+    
        // bear.stop();
-    }
+    
+    // player
     function bearP(){
         // position
         bear.position.x = px;
@@ -105,21 +149,30 @@ function draw() {
         
         // controls
         if (keyIsDown(LEFT_ARROW)) {
-            px -= 3.2;
+            px -= 3;
         //image(rpolarBear,this.x,py,this.r);
-        bear.changeAnimation('backward');
+        bear.changeImage('backward');
         }
         else{
-            bear.changeAnimation('backward');
+          //  bear.changeImage('left')
         }
+        //if(!(keyIsDown(LEFT_ARROW))){
+           // bear.changeImage('left');
+        // }
        
         if (keyIsDown(RIGHT_ARROW)) {
-            px += 3.2;
-            bear.changeAnimation('forward');
+            px += 3;
+            bear.changeImage('forward');
         }
         else{
-            bear.changeAnimation('normal');
+           //bear.changeImage('normal');
         }
+       
+        if (!(keyIsDown(RIGHT_ARROW)||keyIsDown(LEFT_ARROW))){
+            bear.changeImage('normal');
+        }
+            //bear.changeAnimation('normal');
+       // }
         if (keyIsDown(UP_ARROW)) {
             jump = true;
             
@@ -145,31 +198,25 @@ function draw() {
         }
        
         
-        console.log(jumpWatch);
+        //console.log(jumpWatch);
     }
-    bearP();
+        bearP();
 
     function collision() {
         if(bear.collide(ice)){
             py -= barrier;
-          
+            ice.changeAnimation('melty')
         }
         if(bear.collide(ground)){
             py -= 6;
-           fill(255, 0, 0);
-            textSize(50);
-            text('You lost a heart!', 100, 150);
             heart -= 1;
             respawn();
             life();
-            // put a respawn functio
-            // decrease life function
             
         }
-        /*if (bear.collide(baby)) {
-            text('You win!', 100, 150)
-            // state = win state
-        }*/
+        if (bear.collide(baby)) {
+            state = 5;
+        }
         if(bear.collide(iceT)){
             py -= barrier;
             //py+=6;
@@ -180,13 +227,14 @@ function draw() {
         }
         // collision for iceD
         if (bear.collide(iceD)) {
-           py += 9;
+           py += 20;
         }
 
         
 
         
     }  
+   
     function jumpObserver(){
         // jumpWatch=0;
         
@@ -227,17 +275,15 @@ function draw() {
 
     }
     jumpObserver();
-    
-    
     collision();
 
+    // health system
     function life() {
         if (heart == 0) {
-            text('No more life!', 300, 150);
             heart1.visible = false;
             // respawn
             // state = losing state
-            state = 1;
+            state = 4;
         }   
         else if (heart == 2) {
             heart3.visible = false;
@@ -246,16 +292,14 @@ function draw() {
             heart2.visible = false;
         }
     }
-
+    // respawn location 
     function respawn() {
         px = 120;
         py = 100;
     }
 
-
-    
- 
-    function iceP(){
+    // ice platforms
+    function iceP() {
 
         iceT[0].position.x=245;
         iceT[0].position.y=271;
@@ -269,6 +313,7 @@ function draw() {
         iceT[4].position.y=363;
         iceT[5].position.x=192;
         iceT[5].position.y=402;
+
         //top 
         iceD[6].position.x=245;
         iceD[6].position.y=281;
@@ -289,8 +334,8 @@ function draw() {
         iceB[1].position.y=119;
         iceB[2].position.x=739;
         iceB[2].position.y=198;
-        iceB[3].position.x=208;
-        iceB[3].position.y=482;
+        iceB[3].position.x=508;
+        iceB[3].position.y=282;
         iceB[4].position.x=988;
         iceB[4].position.y=297;
         iceB[5].position.x=846;
@@ -303,27 +348,22 @@ function draw() {
         iceD[1].position.y=129;
         iceD[2].position.x=739;
         iceD[2].position.y=208;
-        iceD[3].position.x=208;
-        iceD[3].position.y=492;
+        iceD[3].position.x=508;
+        iceD[3].position.y=292;
         iceD[4].position.x=988;
         iceD[4].position.y=307;
         iceD[5].position.x=846;
         iceD[5].position.y=256;
 
-        
 
-
-
-
-        
-    
     }
+    
   iceP();
-     
+
   function gravity() {
     vy += gravity;
     bear.position.y += vy;
-    vy=constrain(vy,1,3.9);
+    vy = constrain(vy,1,3.9);
         if (py >= minHeight && jump == false){
             // stop falling on the ground
             py = py;
@@ -355,18 +395,89 @@ function draw() {
         }
     }
     
+function meltingIce(){  
+    if(py==ice.position.y-10){
+        ice.changeImage('melty')
+    }
     
+    if(ice.animation.getFrame()==6){
+        ice.removed=true;
+        ice.position.x=5000;
+        ice.position.y=5000;
+    }
+   
+   
+        if (py==iceT[1].position.y-10){
+          // newIceT.changeAnimation('melty');
+
+        }
     
+   
+        if (py==iceB[1].position.y-10){
+            //newIceB.changeAnimation('melty');
+        }
+  
+    /*for(let i=0; i<6; i++){
+        if (bear.collide(iceT[i])){
+           newIceT[i].changeImage('melty');
+            }
+    }*/
+   
+}
+    
+ // meltingIce();  
   //if debug is set to true bounding boxes, centers and depths are visualized
-  bear.debug =true// mouseIsPressed;
+  //bear.debug = true// mouseIsPressed;
   ice.debug = true//mouseIsPressed;
-  iceT.debug = true//mouseIsPressed;
-  iceB.debug= true//mouseIsPressed
-  ground.debug =true// mouseIsPressed;
+ // iceT.debug = true//mouseIsPressed;
+ // iceB.debug = true//mouseIsPressed
+ // ground.debug = true// mouseIsPressed;
 
  
-  drawSprites();
+  drawSprites();    
+    }
+    // lose state
+    if(state == 4) {
+        background(loseScreen);
+        fill(0, 120, 255);
+        textSize(60);
+        text('Gameover!', 300, 100);
+        textSize(25);
+        text("Don't give up! Press down arrow to retry!", 300, 200)    
+        if (keyIsDown(DOWN_ARROW)) {
+           state = 3;
+           // reset hearts back to 3
+           heart = 3;
+           heart1.visible = true;
+           heart2.visible = true;
+           heart3.visible = true;
+        }
+    }   
+     if(state == 5) {
+        background(winScreen);
+        fill(0, 120, 255);
+        textSize(60);
+        text('You WIN!', 300, 100);
+        textSize(20);
+        text("Press down arrow to play again!", 300, 200)    
+    }
+
+}
+
+/*
+function mouseClicked() {
+    if (state == 1) {
+        if (mousex > blah blah) { // play button
+            state == 3;
+        }
+        if (mouseX > blah blah) { // how to play button
+            state == 2;
+        }
     }
 }
 
+
+
+
+*/
 
