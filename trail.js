@@ -23,11 +23,16 @@ let vy = 1.0;
 let heart = 3;
 
 let newIceB;
+//let my =mouseY;
+//let mx =mouseX;
         //SETUP
 
 function setup() {
     createCanvas(1000, 600);
-    
+    resetSketch();
+             
+    }
+function resetSketch(){
     iceT = new Group(); // top part
     iceB = new Group(); // bottom part
     iceD = new Group(); // portion of the ice that pushes the player down
@@ -36,24 +41,26 @@ function setup() {
     for(let i = 0; i < 6; i++) {
         let newIceT = createSprite(random(0, width), random(0, height));
         newIceT.addImage(loadImage('assets/iceF1.png'));
-        newIceT.addAnimation('melty','assets/iceF1.png','assets/ice1.Png','assets/ice2.png','assets/ice3.png','assets/ice4.png','assets/ice5.png','assets/ice6.png');
+        newIceT.addAnimation('melty','assets/iceF1.png','assets/iceF1.png','assets/ice1.Png','assets/ice1.Png','assets/ice2.png','assets/ice2.Png','assets/ice3.Png','assets/ice3.png','assets/ice4.png','assets/ice4.Png','assets/ice5.png','assets/ice5.Png','assets/ice6.png','assets/ice6.Png');
         iceT.add(newIceT);
     }
     for(let i = 0; i < 6; i++) {
         let newIceB = createSprite(random(0, width), random(0, height));
         newIceB.addImage(loadImage('assets/iceF1.png'));
-        newIceB.addAnimation('melty','assets/iceF1.png','assets/ice1.Png','assets/ice2.png','assets/ice3.png','assets/ice4.png','assets/ice5.png','assets/ice6.png');
+        newIceB.addAnimation('melty','assets/iceF1.png','assets/iceF1.png','assets/ice1.Png','assets/ice1.Png','assets/ice2.png','assets/ice2.Png','assets/ice3.Png','assets/ice3.png','assets/ice4.png','assets/ice4.Png','assets/ice5.png','assets/ice5.Png','assets/ice6.png','assets/ice6.Png');
         iceB.add(newIceB);
     }
     for(let i = 0; i < 12; i++) {
         let newIceD = createSprite(random(0, width), random(0, height));
         newIceD.addAnimation('normal','assets/iceF1.png')
-        newIceD.addAnimation('melty','assets/iceF1.png','assets/ice1.Png','assets/ice2.png','assets/ice3.png','assets/ice4.png','assets/ice5.png','assets/ice6.png');
+        newIceD.addAnimation('melty','assets/iceF1.png','assets/iceF1.png','assets/ice1.Png','assets/ice1.Png','assets/ice2.png','assets/ice2.Png','assets/ice3.Png','assets/ice3.png','assets/ice4.png','assets/ice4.Png','assets/ice5.png','assets/ice5.Png','assets/ice6.png','assets/ice6.Png');
         //newIceD1.addAnimation('melty','assets/iceF1.png','assets/ice1.Png','assets/ice2.png','assets/ice3.png','assets/ice4.png','assets/ice5.png');
         iceD.add(newIceD);
        // iceD.add(newIceD1)=false;
     }
-
+    ice = createSprite(150, 200);
+    ice.addAnimation('normal','assets/iceF1.png');
+    ice.addAnimation('melty','assets/iceF1.png','assets/iceF1.png','assets/ice1.Png','assets/ice1.Png','assets/ice2.png','assets/ice2.Png','assets/ice3.Png','assets/ice3.png','assets/ice4.png','assets/ice4.Png','assets/ice5.png','assets/ice5.Png','assets/ice6.png','assets/ice6.Png');
 
     // sprite creation
     bear = createSprite(400, 200,20,20);
@@ -64,9 +71,7 @@ function setup() {
     bear.addAnimation('left','assets/bearX.png');
     bear.addAnimation('backward','assets/bearX.png','assets/bearX.png','assets/bearY.png','assets/bearY.png');
     // ice sprite
-    ice = createSprite(150, 200);
-    ice.addAnimation('normal','assets/iceF1.png');
-    ice.addAnimation('melty','assets/iceF1.png','assets/ice1.Png','assets/ice2.png','assets/ice3.png','assets/ice4.png','assets/ice5.png','assets/ice6.png');
+   
 
     
     // ground sprite
@@ -93,14 +98,72 @@ function setup() {
     winScreen = loadImage('assets/dancing.gif');
     bg = loadImage('assets/background.png');
 
+}
+ 
 
-                
-    }
                 //DRAW
 function draw() {
     //console.log(bear.collide(ice));
     // start screen
- 
+    function iceP() {
+
+        iceT[0].position.x=245;
+        iceT[0].position.y=271;
+        iceT[1].position.x=618;
+        iceT[1].position.y=173;
+        iceT[2].position.x=365;
+        iceT[2].position.y=336;
+        iceT[3].position.x=912;
+        iceT[3].position.y=113;
+        iceT[4].position.x=669;
+        iceT[4].position.y=363;
+        iceT[5].position.x=192;
+        iceT[5].position.y=402;
+
+        //top 
+        iceD[6].position.x=245;
+        iceD[6].position.y=281;
+        iceD[7].position.x=618;
+        iceD[7].position.y=183;
+        iceD[8].position.x=365;
+        iceD[8].position.y=346;
+        iceD[9].position.x=912;
+        iceD[9].position.y=123;
+        iceD[10].position.x=669;
+        iceD[10].position.y=373;
+        iceD[11].position.x=192;
+        iceD[11].position.y=412;
+
+        iceB[0].position.x=331;
+        iceB[0].position.y=156;
+        iceB[1].position.x=892;
+        iceB[1].position.y=119;
+        iceB[2].position.x=739;
+        iceB[2].position.y=198;
+        iceB[3].position.x=488;
+        iceB[3].position.y=282;
+        iceB[4].position.x=988;
+        iceB[4].position.y=297;
+        iceB[5].position.x=846;
+        iceB[5].position.y=246;
+
+        //bottom
+        iceD[0].position.x=331;
+        iceD[0].position.y=166;
+        iceD[1].position.x=892;
+        iceD[1].position.y=129;
+        iceD[2].position.x=739;
+        iceD[2].position.y=208;
+        iceD[3].position.x=488;
+        iceD[3].position.y=292;
+        iceD[4].position.x=988;
+        iceD[4].position.y=307;
+        iceD[5].position.x=846;
+        iceD[5].position.y=256;
+       
+
+    }
+ text('hmm',mouseX,mouseY);
     if (state == 1) {
         background(bg);
         //background();
@@ -114,7 +177,7 @@ function draw() {
         rect(500, 380, 90, 40, 40);
         // excersion button
         rect(525, 435, 50, 25, 40);
-        
+       
     }
     // how to play
     if (state == 2) {
@@ -134,7 +197,7 @@ function draw() {
    // image(backScreen,0,0,1000,600);
     gravity();
        
-      
+    
       console.log(ice.animation.getFrame());
   
     bear.frameDelay=20;
@@ -205,7 +268,7 @@ function draw() {
     function collision() {
         if(bear.collide(ice)){
             py -= barrier;
-            ice.changeAnimation('melty')
+          //  ice.changeAnimation('melty')
         }
         if(bear.collide(ground)){
             py -= 6;
@@ -218,11 +281,11 @@ function draw() {
             state = 5;
         }
         if(bear.collide(iceT)){
-            py -= barrier;
+          //  py -= barrier;
             //py+=6;
         }
         if(bear.collide(iceB)){
-            py -= barrier;
+          //  py -= barrier;
             //py+=6;
         }
         // collision for iceD
@@ -287,78 +350,40 @@ function draw() {
         }   
         else if (heart == 2) {
             heart3.visible = false;
+            for(let i=0; i<6; i++){
+                iceT[i].removed = true//mouseIsPressed;
+                }
+                for(let i=0; i<6; i++){
+                  iceB[i].removed = true//mouseIsPressed;
+                  }
+                  for(let i=0; i<12; i++){
+                      iceD[i].removed = true//mouseIsPressed;
+                  }
+            resetIce()
         }
         else if (heart == 1) {
             heart2.visible = false;
+            for(let i=0; i<6; i++){
+                iceT[i].removed = true//mouseIsPressed;
+                }
+                for(let i=0; i<6; i++){
+                  iceB[i].removed = true//mouseIsPressed;
+                  }
+                  for(let i=0; i<12; i++){
+                      iceD[i].removed = true//mouseIsPressed;
+                  }
+            resetIce();
         }
     }
     // respawn location 
     function respawn() {
         px = 120;
         py = 100;
+
     }
 
     // ice platforms
-    function iceP() {
-
-        iceT[0].position.x=245;
-        iceT[0].position.y=271;
-        iceT[1].position.x=618;
-        iceT[1].position.y=173;
-        iceT[2].position.x=365;
-        iceT[2].position.y=336;
-        iceT[3].position.x=912;
-        iceT[3].position.y=113;
-        iceT[4].position.x=689;
-        iceT[4].position.y=363;
-        iceT[5].position.x=192;
-        iceT[5].position.y=402;
-
-        //top 
-        iceD[6].position.x=245;
-        iceD[6].position.y=281;
-        iceD[7].position.x=618;
-        iceD[7].position.y=183;
-        iceD[8].position.x=365;
-        iceD[8].position.y=346;
-        iceD[9].position.x=912;
-        iceD[9].position.y=123;
-        iceD[10].position.x=689;
-        iceD[10].position.y=373;
-        iceD[11].position.x=192;
-        iceD[11].position.y=412;
-
-        iceB[0].position.x=331;
-        iceB[0].position.y=156;
-        iceB[1].position.x=892;
-        iceB[1].position.y=119;
-        iceB[2].position.x=739;
-        iceB[2].position.y=198;
-        iceB[3].position.x=508;
-        iceB[3].position.y=282;
-        iceB[4].position.x=988;
-        iceB[4].position.y=297;
-        iceB[5].position.x=846;
-        iceB[5].position.y=246;
-
-        //bottom
-        iceD[0].position.x=331;
-        iceD[0].position.y=166;
-        iceD[1].position.x=892;
-        iceD[1].position.y=129;
-        iceD[2].position.x=739;
-        iceD[2].position.y=208;
-        iceD[3].position.x=508;
-        iceD[3].position.y=292;
-        iceD[4].position.x=988;
-        iceD[4].position.y=307;
-        iceD[5].position.x=846;
-        iceD[5].position.y=256;
-
-
-    }
-    
-  iceP();
+    iceP();
 
   function gravity() {
     vy += gravity;
@@ -394,45 +419,150 @@ function draw() {
             velocity = fallingSpeed;
         }
     }
-    
+  //  ice.animation('normal');
 function meltingIce(){  
     if(py==ice.position.y-10){
         ice.changeImage('melty')
+       ice.animation.frameDelay=20;
     }
-    
-    if(ice.animation.getFrame()==6){
+   
+    if(ice.animation.getFrame()===11){
         ice.removed=true;
         ice.position.x=5000;
         ice.position.y=5000;
+     
     }
-   
-   
-        if (py==iceT[1].position.y-10){
-          // newIceT.changeAnimation('melty');
-
-        }
+    if(state==4 &&(ice.removed=true)){
+        ice.changeImage('normal')
+        //ice.removed=false;
+        //ice.position.x=150;
+       // ice.position.y=200;
+    }
     
-   
-        if (py==iceB[1].position.y-10){
-            //newIceB.changeAnimation('melty');
+         for(let i= 0; i<6; i++){
+      if (py==iceT[i].position.y-10&&px>iceT[i].position.x-50&&px<iceT[i].position.x+50){
+          iceT[i].changeAnimation('melty');
+          iceT[i].animation.frameDelay=20;
+      }
+      if(iceT[i].animation.getFrame()===11){ 
+          iceT[i].removed=true;
+          iceT[i].position.x=5000;
+          iceT[i].position.y=5000;
+         // iceT[i].changeAnimation('normal');
+      }
+      if(state==4){
+        iceT[i].changeAnimation('normal');
+       // iceT[i].removed=false;
+        // iceT[0].position.x=245;
+        // iceT[0].position.y=271;
+        // iceT[1].position.x=618;
+        // iceT[1].position.y=173;
+        // iceT[2].position.x=365;
+        // iceT[2].position.y=336;
+        // iceT[3].position.x=912;
+        // iceT[3].position.y=113;
+        // iceT[4].position.x=669;
+        // iceT[4].position.y=363;
+        // iceT[5].position.x=192;
+        // iceT[5].position.y=402;
+      }
+      
+     }
+     for(let i=0; i<6;i++){
+     if (py==iceB[i].position.y-10&&px>iceB[i].position.x-50&&px<iceB[i].position.x+50){
+             iceB[i].changeAnimation('melty');
+             iceB[i].animation.frameDelay=20;
+     }
+        if(iceB[i].animation.getFrame()===11){    
+          iceB[i].removed=true;
+          iceB[i].position.x=5000;
+          iceB[i].position.y=5000;
+        //  iceB[i].changeAnimation('normal');
         }
-  
-    /*for(let i=0; i<6; i++){
-        if (bear.collide(iceT[i])){
-           newIceT[i].changeImage('melty');
-            }
-    }*/
-   
+        if(state==4){
+            iceB[i].changeAnimation('normal');
+            //iceB[i].removed=false;
+            // iceB[0].position.x=331;
+            // iceB[0].position.y=156;
+            // iceB[1].position.x=892;
+            // iceB[1].position.y=119;
+            // iceB[2].position.x=739;
+            // iceB[2].position.y=198;
+            // iceB[3].position.x=488;
+            // iceB[3].position.y=282;
+            // iceB[4].position.x=988;
+            // iceB[4].position.y=297;
+            // iceB[5].position.x=846;
+            // iceB[5].position.y=246;
+        }
+    }
+
+     for(let i=0; i<12; i++){
+         if (py==iceD[i].position.y-20&&px>iceD[i].position.x-50&&px<iceD[i].position.x+50){
+            iceD[i].changeImage('melty');
+            iceD[i].animation.frameDelay=20;
+         }
+        if(iceD[i].animation.getFrame()===11){    
+            iceD[i].removed=true;
+            iceD[i].position.x=5000;
+            iceD[i].position.y=5000;
+         //   iceD[i].changeImage('normal');
+        }
+      
+        if(state==4){
+            iceD[i].changeImage('normal');
+           // iceD[i].removed=false;
+            // iceD[0].position.x=331;
+            // iceD[0].position.y=166;
+            // iceD[1].position.x=892;
+            // iceD[1].position.y=129;
+            // iceD[2].position.x=739;
+            // iceD[2].position.y=208;
+            // iceD[3].position.x=488;
+            // iceD[3].position.y=292;
+            // iceD[4].position.x=988;
+            // iceD[4].position.y=307;
+            // iceD[5].position.x=846;
+            // iceD[5].position.y=256;
+            // iceD[6].position.x=245;
+            // iceD[6].position.y=281;
+            // iceD[7].position.x=618;
+            // iceD[7].position.y=183;
+            // iceD[8].position.x=365;
+            // iceD[8].position.y=346;
+            // iceD[9].position.x=912;
+            // iceD[9].position.y=123;
+            // iceD[10].position.x=669;
+            // iceD[10].position.y=373;
+            // iceD[11].position.x=192;
+            // iceD[11].position.y=412;
+        }
+        
+     }
+    console.log(ice.removed);
 }
     
- // meltingIce();  
+ meltingIce();  
   //if debug is set to true bounding boxes, centers and depths are visualized
-  //bear.debug = true// mouseIsPressed;
-  ice.debug = true//mouseIsPressed;
- // iceT.debug = true//mouseIsPressed;
- // iceB.debug = true//mouseIsPressed
+  bear.debug = false// mouseIsPressed;
+  ice.debug = false//mouseIsPressed;
+  for(let i=0; i<6; i++){
+  iceT[i].debug = false//mouseIsPressed;
+  }
+  for(let i=0; i<6; i++){
+    iceB[i].debug = false//mouseIsPressed;
+    }
+    for(let i=0; i<12; i++){
+        iceD[i].debug = false//mouseIsPressed;
+        }
+ // iceB[i].debug = true//mouseIsPressed
  // ground.debug = true// mouseIsPressed;
-
+ function mouse() {
+    ellipse(mouseX, mouseY, 1, 1); 
+  var hello = mouseX + ", " +mouseY;
+  text( hello, mouseX, mouseY);
+};
+mouse();
  
   drawSprites();    
     }
@@ -444,13 +574,38 @@ function meltingIce(){
         text('Gameover!', 300, 100);
         textSize(25);
         text("Don't give up! Press down arrow to retry!", 300, 200)    
-        if (keyIsDown(DOWN_ARROW)) {
-           state = 3;
-           // reset hearts back to 3
-           heart = 3;
-           heart1.visible = true;
-           heart2.visible = true;
-           heart3.visible = true;
+        
+        iceP();
+    
+        ice.position.x=150;
+        ice.position.y=200;
+   //    ice.animation.looping=true;
+        //ice.removed=false;
+         
+         
+         if (keyIsDown(UP_ARROW)||keyIsDown(DOWN_ARROW)) {
+            state = 3;
+            for(let i=0; i<6; i++){
+                iceT[i].removed = true//mouseIsPressed;
+                }
+                for(let i=0; i<6; i++){
+                  iceB[i].removed = true//mouseIsPressed;
+                  }
+                  for(let i=0; i<12; i++){
+                      iceD[i].removed = true//mouseIsPressed;
+                  }
+       
+            // reset hearts back to 3
+            heart = 3;
+            heart1.visible = true;
+            heart2.visible = true;
+            heart3.visible = true;
+            
+            resetIce();
+            
+            //state = 3;
+            
+            
         }
     }   
      if(state == 5) {
@@ -459,25 +614,365 @@ function meltingIce(){
         textSize(60);
         text('You WIN!', 300, 100);
         textSize(20);
-        text("Press down arrow to play again!", 300, 200)    
+        text("Press down arrow to play again!", 300, 200); 
+        if (keyIsDown(DOWN_ARROW)) {
+            state = 3;
+            // reset hearts back to 3
+            heart = 3;
+            heart1.visible = true;
+            heart2.visible = true;
+            heart3.visible = true;
+        }  
     }
-
+    console.log((ice.position.x),(ice.position.y));
 }
 
-/*
+
 function mouseClicked() {
-    if (state == 1) {
-        if (mousex > blah blah) { // play button
-            state == 3;
-        }
-        if (mouseX > blah blah) { // how to play button
-            state == 2;
-        }
+    if (state == 4) {
+       state==3;        
     }
 }
 
 
 
 
-*/
 
+
+function resetIce(){
+    iceT = new Group(); // top part
+    iceB = new Group(); // bottom part
+    iceD = new Group(); // portion of the ice that pushes the player down
+    
+    // for loop for platforms
+    for(let i = 0; i < 6; i++) {
+        let newIceT = createSprite(random(0, width), random(0, height));
+        newIceT.addImage(loadImage('assets/iceF1.png'));
+        newIceT.addAnimation('melty','assets/iceF1.png','assets/iceF1.png','assets/ice1.Png','assets/ice1.Png','assets/ice2.png','assets/ice2.Png','assets/ice3.Png','assets/ice3.png','assets/ice4.png','assets/ice4.Png','assets/ice5.png','assets/ice5.Png','assets/ice6.png','assets/ice6.Png');
+        iceT.add(newIceT);
+    }
+    for(let i = 0; i < 6; i++) {
+        let newIceB = createSprite(random(0, width), random(0, height));
+        newIceB.addImage(loadImage('assets/iceF1.png'));
+        newIceB.addAnimation('melty','assets/iceF1.png','assets/iceF1.png','assets/ice1.Png','assets/ice1.Png','assets/ice2.png','assets/ice2.Png','assets/ice3.Png','assets/ice3.png','assets/ice4.png','assets/ice4.Png','assets/ice5.png','assets/ice5.Png','assets/ice6.png','assets/ice6.Png');
+        iceB.add(newIceB);
+    }
+    for(let i = 0; i < 12; i++) {
+        let newIceD = createSprite(random(0, width), random(0, height));
+        newIceD.addAnimation('normal','assets/iceF1.png')
+        newIceD.addAnimation('melty','assets/iceF1.png','assets/iceF1.png','assets/ice1.Png','assets/ice1.Png','assets/ice2.png','assets/ice2.Png','assets/ice3.Png','assets/ice3.png','assets/ice4.png','assets/ice4.Png','assets/ice5.png','assets/ice5.Png','assets/ice6.png','assets/ice6.Png');
+        //newIceD1.addAnimation('melty','assets/iceF1.png','assets/ice1.Png','assets/ice2.png','assets/ice3.png','assets/ice4.png','assets/ice5.png');
+        iceD.add(newIceD);
+       // iceD.add(newIceD1)=false;
+    }
+    ice = createSprite(150, 200);
+    ice.addAnimation('normal','assets/iceF1.png');
+    ice.addAnimation('melty','assets/iceF1.png','assets/iceF1.png','assets/ice1.Png','assets/ice1.Png','assets/ice2.png','assets/ice2.Png','assets/ice3.Png','assets/ice3.png','assets/ice4.png','assets/ice4.Png','assets/ice5.png','assets/ice5.Png','assets/ice6.png','assets/ice6.Png');
+
+}
+
+function retry(){
+
+   // 
+        if (py==iceT[0].position.y-10&&px>iceT[0].position.x-50&&px<iceT[0].position.x+50){
+            iceT[0].changeAnimation('melty');
+            iceT[0].animation.frameDelay=20;
+        }
+        if(iceT[0].animation.getFrame()===11){ 
+            iceT[0].removed=true;
+            iceT[0].position.x=5000;
+            iceT[0].position.y=5000;
+           // iceT[i].changeAnimation('normal');
+        }
+        if (py==iceT[1].position.y-10&&px>iceT[1].position.x-50&&px<iceT[1].position.x+50){
+            iceT[1].changeAnimation('melty');
+            iceT[1].animation.frameDelay=20;
+        }
+        if(iceT[1].animation.getFrame()===11){ 
+            iceT[1].removed=true;
+            iceT[1].position.x=5000;
+            iceT[1].position.y=5000;
+           // iceT[i].changeAnimation('normal');
+        }
+        if (py==iceT[2].position.y-10&&px>iceT[2].position.x-50&&px<iceT[2].position.x+50){
+            iceT[2].changeAnimation('melty');
+            iceT[2].animation.frameDelay=20;
+        }
+        if(iceT[2].animation.getFrame()===11){ 
+            iceT[2].removed=true;
+            iceT[2].position.x=5000;
+            iceT[2].position.y=5000;
+           // iceT[i].changeAnimation('normal');
+        }
+        if (py==iceT[3].position.y-10&&px>iceT[3].position.x-50&&px<iceT[3].position.x+50){
+            iceT[3].changeAnimation('melty');
+            iceT[3].animation.frameDelay=20;
+        }
+        if(iceT[3].animation.getFrame()===11){ 
+            iceT[3].removed=true;
+            iceT[3].position.x=5000;
+            iceT[3].position.y=5000;
+           // iceT[i].changeAnimation('normal');
+        }
+        if (py==iceT[4].position.y-10&&px>iceT[4].position.x-50&&px<iceT[4].position.x+50){
+            iceT[4].changeAnimation('melty');
+            iceT[4].animation.frameDelay=20;
+        }
+        if(iceT[4].animation.getFrame()===11){ 
+            iceT[4].removed=true;
+            iceT[4].position.x=5000;
+            iceT[4].position.y=5000;
+           // iceT[i].changeAnimation('normal');
+        }
+        if (py==iceT[5].position.y-10&&px>iceT[5].position.x-50&&px<iceT[5].position.x+50){
+            iceT[5].changeAnimation('melty');
+            iceT[5].animation.frameDelay=20;
+        }
+        if(iceT[5].animation.getFrame()===11){ 
+            iceT[5].removed=true;
+            iceT[5].position.x=5000;
+            iceT[5].position.y=5000;
+           // iceT[i].changeAnimation('normal');
+        }
+        for(let i= 0; i<6; i++){    
+        if(state==4){
+           iceT[i].changeAnimation('normal');
+           iceT[i].removed=false;
+           iceT[0].position.x=245;
+           iceT[0].position.y=271;
+           iceT[1].position.x=618;
+           iceT[1].position.y=173;
+           iceT[2].position.x=365;
+           iceT[2].position.y=336;
+           iceT[3].position.x=912;
+           iceT[3].position.y=113;
+           iceT[4].position.x=669;
+           iceT[4].position.y=363;
+           iceT[5].position.x=192;
+           iceT[5].position.y=402;
+        }
+        
+       }
+      
+    if (py==iceB[0].position.y-10&&px>iceB[0].position.x-50&&px<iceB[0].position.x+50){
+               iceT[0].changeAnimation('melty');
+               iceT[0].animation.frameDelay=20;
+       }
+          if(iceB[0].animation.getFrame()===11){    
+            iceB[0].removed=true;
+            iceB[0].position.x=5000;
+            iceB[0].position.y=5000;
+          //  iceB[0].changeAnimation('normal');
+          }
+    if (py==iceB[1].position.y-10&&px>iceB[1].position.x-50&&px<iceB[1].position.x+50){
+            iceB[1].changeAnimation('melty');
+            iceB[1].animation.frameDelay=20;
+        }
+       if(iceB[1].animation.getFrame()===11){    
+         iceB[1].removed=true;
+         iceB[1].position.x=5000;
+         iceB[1].position.y=5000;
+       //  iceB[1].changeAnimation('normal');
+       }
+    if (py==iceB[2].position.y-10&&px>iceB[2].position.x-50&&px<iceB[2].position.x+50){
+        iceB[2].changeAnimation('melty');
+        iceB[2].animation.frameDelay=20;
+    }
+    if(iceB[2].animation.getFrame()===11){    
+        iceB[2].removed=true;
+        iceB[2].position.x=5000;
+        iceB[2].position.y=5000;
+        //  iceB[2].changeAnimation('normal');
+        }
+    if (py==iceB[3].position.y-10&&px>iceB[3].position.x-50&&px<iceB[3].position.x+50){
+            iceB[3].changeAnimation('melty');
+            iceB[3].animation.frameDelay=20;
+        }
+       if(iceB[3].animation.getFrame()===11){    
+         iceB[3].removed=true;
+         iceB[3].position.x=5000;
+         iceB[3].position.y=5000;
+       //  iceB[3].changeAnimation('normal');
+       }
+    if (py==iceB[4].position.y-10&&px>iceB[4].position.x-50&&px<iceB[4].position.x+50){
+        iceB[4].changeAnimation('melty');
+        iceB[4].animation.frameDelay=20;
+    }
+   if(iceB[4].animation.getFrame()===11){    
+     iceB[4].removed=true;
+     iceB[4].position.x=5000;
+     iceB[4].position.y=5000;
+   //  iceB[4].changeAnimation('normal');
+   }
+   if (py==iceB[5].position.y-10&&px>iceB[5].position.x-50&&px<iceB[5].position.x+50){
+    iceB[5].changeAnimation('melty');
+    iceB[5].animation.frameDelay=20;
+        }
+        if(iceB[5].animation.getFrame()===11){    
+        iceB[5].removed=true;
+        iceB[5].position.x=5000;
+        iceB[5].position.y=5000;
+        //  iceB[5].changeAnimation('normal');
+        }
+        for(let i=0; i<6;i++){
+          if(state==4){
+              iceB[i].changeAnimation('normal');
+              iceB[i].removed=false;
+              iceB[0].position.x=331;
+              iceB[0].position.y=156;
+              iceB[1].position.x=892;
+              iceB[1].position.y=119;
+              iceB[2].position.x=739;
+              iceB[2].position.y=198;
+              iceB[3].position.x=488;
+              iceB[3].position.y=282;
+              iceB[4].position.x=988;
+              iceB[4].position.y=297;
+              iceB[5].position.x=846;
+              iceB[5].position.y=246;
+          }
+      }
+  
+      if (py==iceD[1].position.y-20&&px>iceD[1].position.x-50&&px<iceD[1].position.x+50){
+              iceD[1].changeImage('melty');
+              iceD[1].animation.frameDelay=20;
+           }
+          if(iceD[1].animation.getFrame()===11){    
+              iceD[1].removed=true;
+              iceD[1].position.x=5000;
+              iceD[1].position.y=5000;
+           //   iceD[1].changeImage('normal');
+          }
+          if (py==iceD[2].position.y-20&&px>iceD[2].position.x-50&&px<iceD[2].position.x+50){
+            iceD[2].changeImage('melty');
+            iceD[2].animation.frameDelay=20;
+         }
+        if(iceD[2].animation.getFrame()===11){    
+            iceD[2].removed=true;
+            iceD[2].position.x=5000;
+            iceD[2].position.y=5000;
+         //   iceD[2].changeImage('normal');
+        }
+        if (py==iceD[3].position.y-20&&px>iceD[3].position.x-50&&px<iceD[3].position.x+50){
+            iceD[3].changeImage('melty');
+            iceD[3].animation.frameDelay=20;
+         }
+        if(iceD[3].animation.getFrame()===11){    
+            iceD[3].removed=true;
+            iceD[3].position.x=5000;
+            iceD[3].position.y=5000;
+         //   iceD[3].changeImage('normal');
+        }
+        if (py==iceD[4].position.y-20&&px>iceD[4].position.x-50&&px<iceD[4].position.x+50){
+            iceD[4].changeImage('melty');
+            iceD[4].animation.frameDelay=20;
+         }
+        if(iceD[4].animation.getFrame()===11){    
+            iceD[4].removed=true;
+            iceD[4].position.x=5000;
+            iceD[4].position.y=5000;
+         //   iceD[4].changeImage('normal');
+        }
+        if (py==iceD[5].position.y-20&&px>iceD[5].position.x-50&&px<iceD[5].position.x+50){
+            iceD[5].changeImage('melty');
+            iceD[5].animation.frameDelay=20;
+         }
+        if(iceD[5].animation.getFrame()===11){    
+            iceD[5].removed=true;
+            iceD[5].position.x=5000;
+            iceD[5].position.y=5000;
+         //   iceD[5].changeImage('normal');
+        }
+        if (py==iceD[6].position.y-20&&px>iceD[6].position.x-50&&px<iceD[6].position.x+50){
+            iceD[6].changeImage('melty');
+            iceD[6].animation.frameDelay=20;
+         }
+        if(iceD[6].animation.getFrame()===11){    
+            iceD[6].removed=true;
+            iceD[6].position.x=5000;
+            iceD[6].position.y=5000;
+         //   iceD[6].changeImage('normal');
+        }
+        if (py==iceD[7].position.y-20&&px>iceD[7].position.x-50&&px<iceD[7].position.x+50){
+            iceD[7].changeImage('melty');
+            iceD[7].animation.frameDelay=20;
+         }
+        if(iceD[7].animation.getFrame()===11){    
+            iceD[7].removed=true;
+            iceD[7].position.x=5000;
+            iceD[7].position.y=5000;
+         //   iceD[7].changeImage('normal');
+        }
+        if (py==iceD[8].position.y-20&&px>iceD[8].position.x-50&&px<iceD[8].position.x+50){
+            iceD[8].changeImage('melty');
+            iceD[8].animation.frameDelay=20;
+         }
+        if(iceD[8].animation.getFrame()===11){    
+            iceD[8].removed=true;
+            iceD[8].position.x=5000;
+            iceD[8].position.y=5000;
+         //   iceD[8].changeImage('normal');
+        }
+        if (py==iceD[9].position.y-20&&px>iceD[9].position.x-50&&px<iceD[9].position.x+50){
+            iceD[9].changeImage('melty');
+            iceD[9].animation.frameDelay=20;
+         }
+        if(iceD[9].animation.getFrame()===11){    
+            iceD[9].removed=true;
+            iceD[9].position.x=5000;
+            iceD[9].position.y=5000;
+         //   iceD[9].changeImage('normal');
+        }
+        if (py==iceD[10].position.y-20&&px>iceD[10].position.x-50&&px<iceD[10].position.x+50){
+            iceD[10].changeImage('melty');
+            iceD[10].animation.frameDelay=20;
+         }
+        if(iceD[10].animation.getFrame()===11){    
+            iceD[10].removed=true;
+            iceD[10].position.x=5000;
+            iceD[10].position.y=5000;
+         //   iceD[10].changeImage('normal');
+        }
+        if (py==iceD[11].position.y-20&&px>iceD[11].position.x-50&&px<iceD[11].position.x+50){
+            iceD[11].changeImage('melty');
+            iceD[11].animation.frameDelay=20;
+         }
+        if(iceD[11].animation.getFrame()===11){    
+            iceD[11].removed=true;
+            iceD[11].position.x=5000;
+            iceD[11].position.y=5000;
+         //   iceD[11].changeImage('normal');
+        }
+    
+          for(let i=0; i<12; i++){
+          if(state==4){
+              iceD[i].changeImage('normal');
+             iceD[i].removed=false;
+              iceD[0].position.x=331;
+              iceD[0].position.y=166;
+              iceD[1].position.x=892;
+              iceD[1].position.y=129;
+              iceD[2].position.x=739;
+              iceD[2].position.y=208;
+              iceD[3].position.x=488;
+              iceD[3].position.y=292;
+              iceD[4].position.x=988;
+              iceD[4].position.y=307;
+              iceD[5].position.x=846;
+              iceD[5].position.y=256;
+              iceD[6].position.x=245;
+              iceD[6].position.y=281;
+              iceD[7].position.x=618;
+              iceD[7].position.y=183;
+              iceD[8].position.x=365;
+              iceD[8].position.y=346;
+              iceD[9].position.x=912;
+              iceD[9].position.y=123;
+              iceD[10].position.x=669;
+              iceD[10].position.y=373;
+              iceD[11].position.x=192;
+              iceD[11].position.y=412;
+          }
+          
+       }
+}
